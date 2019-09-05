@@ -10,7 +10,7 @@ class PolynomialeClass
 
 		PolynomialeClass(); //Constructeur
 		PolynomialeClass(std::string argv); // autre constructeur avec un parametre
-		void reducePolynomiale(std::string argv);
+		int reducePolynomiale(std::string argv);
 		float calculDiscriminant();
 		void resolve(std::string argv);
 		void resolveEqDegreTwo();

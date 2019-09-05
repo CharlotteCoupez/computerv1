@@ -48,7 +48,7 @@ float PolynomialeClass::racinecarree(float num) // méthode de Newton
 	return x;
 }
 
-void PolynomialeClass::reducePolynomiale(string argv)
+int PolynomialeClass::reducePolynomiale(string argv)
 {
 	m_test = argv;
 	std::cout << "vous avez envoyé une équation à résoudre on reduce lequation" << m_test << std::endl;
@@ -79,14 +79,24 @@ void PolynomialeClass::reducePolynomiale(string argv)
 			}
 		}
 	}
-	for (int i = 0; i < m_values.size(); i++)
+	std::cout << "aa m_values[i] : " << m_values[0] << m_values.size() << std::endl;
+	std::cout << "aa m_puissances[i] : " << m_puissances[0] << m_puissances.size() << std::endl;
+	if (m_values.size() == 0 && m_puissances.size() == 0)
 	{
-		std::cout << "m_values[i] : " << m_values[i] << std::endl;
+		std::cout << "all real numbers are solution... " << std::endl;
+		return 0;
 	}
-	for (int i = 0; i < m_puissances.size(); i++)
+		for (int i = 0; i < m_values.size();)
+		{
+			std::cout << "apres parse m_values[i] : " << m_values[i] << std::endl;
+			i++;
+		}
+	for (int i = 0; i < m_puissances.size();)
 	{
-		std::cout << "m_puissances[i] : " << m_puissances[i] << std::endl;
+		std::cout << "apres parse m_puissances[i] : " << m_puissances[i] << std::endl;
+		i++;
 	}
+	return 1;
 }
 
 void PolynomialeClass::sortTabs()
@@ -168,13 +178,15 @@ void PolynomialeClass::resolveEqDegreOne()
 void PolynomialeClass::resolve(string argv)
 {
 	// a faire : resoudre equation de degre 1 et le cas ou il n'y a plus de x aussi ou ou toute les valeurs son ok genre 42x = 42X
-	reducePolynomiale(argv);
-	std::cout << "resolve" << std::endl;
-	sortTabs();
-	if (degre == 2)
-		resolveEqDegreTwo();
-	else if (degre == 1)
-		resolveEqDegreOne();
-	else
-		std::cout << "this is not an equation." << std::endl;
+	if (reducePolynomiale(argv))
+	{
+		std::cout << "resolve" << std::endl;
+		sortTabs();
+		if (degre == 2)
+			resolveEqDegreTwo();
+		else if (degre == 1)
+			resolveEqDegreOne();
+		else
+			std::cout << "this is not an equation." << std::endl;
+	}
 }
