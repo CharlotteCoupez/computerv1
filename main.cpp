@@ -6,17 +6,19 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
+	int i;
+
+	i = 1;
 	if (argc > 1)
 	{
-		PolynomialeClass equation(argv[1]);
-		// pour bonus faire ici une fonction equation.formatWell avant de cree les attribut de l'objet
-		equation.resolve(argv[1]);
-		std::cout << "FIN" << std::endl;
+		while (argv[i])
+		{
+			PolynomialeClass equation(argv[i]);
+			equation.resolve(argv[i]);
+			i++;
+		}
 	}
 	else
-	{
 		std::cout <<"vous n'avez pas envoyé d'équation à résoudre" << std::endl;
-	}
-
 	return 0;
 }

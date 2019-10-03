@@ -1,0 +1,36 @@
+source : https://www.mathematiquesfaciles.com/cgi2/myexam/voir2r.php?id=33929
+
+Degre 2
+
+"1 * X^2 + 3 * X^1 + 2 * X^0 = 0 * X^1"
+Solution : -2 -1
+
+"1 * X^2 + 1 * X^1 + 1 * X^0 = 0 * X^1"
+Pas de solution discriminant negatif
+
+"4 * X^2 + 4 * X^1 + 1 * X^0 = 0 * X^1" OU
+"4 * X^2 + 4 * X^1 = -1 * X^0 + 0 * X^1"
+Discriminant nul1 solution -0.5
+
+"1 * X^2 + 4 * X^1 = 0 * X^0 + 0 * X^1"
+"1 * X^2 + 4 * X^1 = 0 * X^1"
+solution -4 et 0
+
+"1 * X^2 + 0 * X^1 + 1 * X^0 = 0 * X^1"
+Pas de solution discriminant negatif
+
+"42 * X^1 = 42 * X^1"
+all real numbers are solution...
+
+
+degre 1
+
+"42 * X^1 = 4 * X^1"
+The solution is:
+0.105263
+
+
+
+test pour pluieurs entrées :
+
+"1 * X^2 + 4 * X^1 = 0 * X^1" "42 * X^1 = 4 * X^1"
