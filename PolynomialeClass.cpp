@@ -23,7 +23,7 @@ PolynomialeClass::PolynomialeClass(string argv)
 			if (m_values.size() == m_puissances.size())
 				m_values.push_back(atof(tmp.c_str()) * sign);
 			else
-				m_puissances.push_back(atof(tmp.c_str()));
+				m_puissances.push_back(atoi(tmp.c_str()));
 		}
 	}
 }
@@ -38,6 +38,8 @@ void PolynomialeClass::resolve(string argv)
 			resolveEqDegreTwo();
 		else if (degre == 1)
 			resolveEqDegreOne();
+		else if (degre == 0)
+			std::cout << "There is no solution " << std::endl;
 	}
 }
 
@@ -45,28 +47,34 @@ int PolynomialeClass::reducePolynomiale(string argv)
 {
 	m_test = argv;
 
-	for (long i = 0; i < m_puissances.size(); i++)
+	for (size_t i = 0; i < m_puissances.size(); i++)
 	{
-		for (long j = i + 1; j < m_puissances.size(); j++)
+		if (m_values[i] == 0)
+		{
+			m_values.erase(m_values.begin() + i);
+			m_puissances.erase(m_puissances.begin() + i);
+			i--;
+		}
+		for (size_t j = i + 1; j < m_puissances.size(); j++)
 		{
 			if (m_puissances[i] == m_puissances[j])
 			{
 				m_values[i] = m_values[i] + m_values[j];
 				m_values.erase(m_values.begin() + j);
 				m_puissances.erase(m_puissances.begin() + j);
-				if (m_values[i] == 0)
-				{
-					m_values.erase(m_values.begin() + i);
-					m_puissances.erase(m_puissances.begin() + i);
-					i = 0;
-					j = 0;
-				}
+				j--;
+			}
+			if (m_values[i] == 0)
+			{
+				m_values.erase(m_values.begin() + i);
+				i--;
+				m_puissances.erase(m_puissances.begin() + i);
 			}
 		}
 	}
 	if (m_values.size() == 0 && m_puissances.size() == 0)
 	{
-		std::cout << "All real numbers are solution... " << std::endl;
+		std::cout << "All real numbers are solution! " << std::endl;
 		return 0;
 	}
 	return 1;
@@ -74,9 +82,9 @@ int PolynomialeClass::reducePolynomiale(string argv)
 
 void PolynomialeClass::sortTabs()
 {
-	double tmpValue;
-	int tmpPuissance;
-	size_t i;
+	size_t	i;
+	double	tmpValue;
+	int		tmpPuissance;
 
 	i = 0;
 	while ( i < m_puissances.size() -1)
@@ -103,14 +111,14 @@ void PolynomialeClass::printInfos()
 	{
 		std::cout << " " << m_values[j];
 		std::cout << " * X^" << m_puissances[j];
-		if (m_values[j + 1] >= 0)
+		if (j + 1 < m_values.size() && m_values[j + 1] >= 0)
 			std::cout << " +";
 	}
 	std::cout << " = 0" << std::endl;
 	if (m_puissances[0] > 2)
 	{
-		std::cout << "The polynomial degree is stricly greater than 2, I can't solve." << std::endl;
 		std::cout << "Polynomial degree: : " << m_puissances[0] << std::endl;
+		std::cout << "The polynomial degree is stricly greater than 2, I can't solve." << std::endl;
 		degre = m_puissances[0];
 		return;
 	}
@@ -127,14 +135,14 @@ void PolynomialeClass::printInfos()
 
 double PolynomialeClass::calculDiscriminant()
 {
-	discriminant = (m_values[1] * m_values[1]) - (4 * m_values[0] * m_values[2]); // discriminant = b * b - 4 * a * c
+	discriminant = (m_values[1] * m_values[1]) - (4 * m_values[0] * m_values[2]); // discriminant = b^2 - 4ac
 	return discriminant;
 }
 
 void PolynomialeClass::resolveEqDegreTwo()
 {
-	double s1 = 0;
-	double s2 = 0;
+	double s1;
+	double s2;
 
 	calculDiscriminant();
 	if (discriminant > 0)
@@ -148,7 +156,7 @@ void PolynomialeClass::resolveEqDegreTwo()
 	{
 		std::cout << "Discriminant is null, the solution is:" << std::endl;
 		s1 = -m_values[1] / (2 * m_values[0]);
-		std::cout << "s1 : " << s1 << std::endl;
+		std::cout << s1 << std::endl;
 	}
 	else if (discriminant < 0)
 		std::cout << "Discriminant is strictly negative, no real solution existe." << std::endl;
@@ -170,14 +178,3 @@ double PolynomialeClass::racinecarree(double num) // méthode de Newton
 		x = 0.5 * (x + num / x);
 	return x;
 }
-
-	//for (int i = 0; i < m_values.size();)
-	//{
-	//	std::cout << "apres parse m_values[i] : " << m_values[i] << std::endl;
-	//	i++;
-	//}
-	//for (int i = 0; i < m_puissances.size();)
-	//{
-	//	std::cout << "apres parse m_puissances[i] : " << m_puissances[i] << std::endl;
-	//	i++;
-	//}

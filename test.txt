@@ -16,11 +16,16 @@ Discriminant nul1 solution -0.5
 "1 * X^2 + 4 * X^1 = 0 * X^1"
 solution -4 et 0
 
-"1 * X^2 + 0 * X^1 + 1 * X^0 = 0 * X^1"
+"1 * X^2 + 1 * X^1 + 1 * X^0 = 0 * X^1"
 Pas de solution discriminant negatif
 
 "42 * X^1 = 42 * X^1"
 all real numbers are solution...
+
+
+
+"1 * X^2 + 0 * X^1 + 1 * X^0 = 0 * X^1"
+solution: -1 0
 
 
 degre 1

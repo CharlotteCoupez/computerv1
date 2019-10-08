@@ -12,7 +12,7 @@ OBJS_NAME = $(SRCS_NAME:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS_NAME)
-	g++ -g $(SRCS_NAME) -o $(NAME)
+	g++ $(SRCS_NAME) -o $(NAME)
 
 clean:
 	@rm -f $(OBJS_NAME)
